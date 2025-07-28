@@ -4,19 +4,16 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-
-  webpack: (config, { dev, isServer }) => {
+  images: {
+    domains: ['lovable.dev'],
+    formats: ['image/avif', 'image/webp'],
+  },
+  webpack: (config) => {
     // Setup Alias @ → /src
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       '@': path.resolve(__dirname, 'src'),
     };
-
-    // Add componentTagger plugin in development (client-side only)
-    if (dev && !isServer) {
-      const { componentTagger } = require('lovable-tagger');
-      config.plugins.push(componentTagger());
-    }
 
     return config;
   },
