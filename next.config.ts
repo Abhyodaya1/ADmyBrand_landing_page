@@ -1,4 +1,4 @@
-
+// C:\Users\ASUS\Desktop\admybrand-app\next.config.ts
 import type { NextConfig } from 'next';
 import path from 'path';
 
@@ -8,13 +8,12 @@ const nextConfig: NextConfig = {
     domains: ['lovable.dev'],
     formats: ['image/avif', 'image/webp'],
   },
+  allowedDevOrigins: ['http://10.177.33.169:8080'],
   webpack: (config) => {
-    // Setup Alias @ → /src
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       '@': path.resolve(__dirname, 'src'),
     };
-
     return config;
   },
 };

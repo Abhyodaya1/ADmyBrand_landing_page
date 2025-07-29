@@ -1,15 +1,17 @@
 import { GlassCard, CardContent } from "@/components/ui/glass-card";
+import { InteractiveCard } from "@/components/ui/interactive-card";
 import { Star } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
+import omniChannelDashboard from "@/assets/omnichannel-dashboard.jpg";
+import teamCollaboration from "@/assets/team-collaboration.jpg";
 
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Chen",
+    name: "Romario",
     role: "Marketing Director",
     company: "TechFlow Inc.",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
-    rating: 5,
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
     quote: "ADmyBRAND AI Suite completely transformed our marketing ROI. We saw a 340% increase in conversions within the first month. The AI insights are incredibly accurate and actionable.",
   },
   {
@@ -92,28 +94,38 @@ export function TestimonialsSection() {
   return (
     <section id="testimonials" className="py-20 px-4 relative overflow-hidden">
       <div className="container mx-auto">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
-            <span className="gradient-text">Loved by Thousands</span>
-            <br />
-            of Marketing Teams
-          </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            See how businesses like yours are achieving incredible results with 
-            ADmyBRAND AI Suite's intelligent marketing automation.
-          </p>
+        {/* Header with Background Image */}
+        <div className="relative text-center max-w-4xl mx-auto mb-20 fade-in-up ">
+          <div className="absolute inset-0 opacity-10 rounded-3xl overflow-hidden">
+            
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+          </div>
+          <div className="relative z-10 p-8 rounded-xl neon-pulse">
+            <h2 className="text-4xl md:text-6xl font-bold font-space mb-6">
+              <span className="gradient-text">Loved by Thousands</span>
+              <br />
+              <span className="text-foreground">of Marketing Teams</span>
+            </h2>
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              See how businesses like yours are achieving incredible results with 
+              ADmyBRAND AI Suite's intelligent omnichannel advertising platform.
+            </p>
+          </div>
         </div>
 
-        {/* Horizontal Scrolling Testimonials */}
-        <div className="relative mb-12 stagger-parent">
-          {/* Gradient Fade Edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        {/* Enhanced Horizontal Scrolling Testimonials */}
+        <div className="relative mb-16 stagger-parent">
+          {/* Enhanced Gradient Fade Edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none" />
+          
+          {/* Background Glow Effects */}
+          <div className="absolute top-1/2 left-1/4 w-64 h-64 -translate-y-1/2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-1/2 right-1/4 w-48 h-48 -translate-y-1/2 bg-gradient-to-l from-secondary/10 to-primary/10 rounded-full blur-3xl pointer-events-none" />
           
           <div
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto horizontal-scroll pb-4 cursor-grab active:cursor-grabbing"
+            className="flex gap-8 overflow-x-auto horizontal-scroll pb-6 px-8 cursor-grab active:cursor-grabbing"
             style={{ 
               scrollSnapType: 'x mandatory',
               WebkitOverflowScrolling: 'touch',
@@ -130,47 +142,58 @@ export function TestimonialsSection() {
                 className="flex-none w-80 sm:w-96 scroll-snap-align-start stagger-child"
                 style={{ scrollSnapAlign: 'start' }}
               >
-                <GlassCard 
-                  variant="hover"
-                  className="h-full hover-scale-lift ripple-effect group"
+                <InteractiveCard
+                  className="h-full gradient-flow"
+                  enableParallax={true}
+                  enableTilt={true}
+                  glowIntensity="high"
                 >
-                  <CardContent className="p-8">
-                    {/* Stars */}
+                  <CardContent className="p-8 relative z-10">
+                    {/* Floating Stars with Enhanced Animation */}
                     <div className="flex space-x-1 mb-6">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 text-warning fill-current hover-glow-purple transition-all duration-300 group-hover:scale-110" />
+                        <Star 
+                          key={i} 
+                          className="h-6 w-6 text-primary fill-current transition-all duration-500 hover:scale-125 hover:rotate-12" 
+                          style={{ 
+                            animationDelay: `${i * 0.1}s`,
+                            filter: 'drop-shadow(0 0 8px hsl(var(--primary) / 0.6))'
+                          }}
+                        />
                       ))}
                     </div>
 
-                    {/* Quote */}
-                    <blockquote className="text-lg leading-relaxed text-foreground mb-8 font-medium">
-                      "{testimonial.quote}"
+                    {/* Enhanced Quote */}
+                    <blockquote className="text-lg leading-relaxed text-foreground mb-8 font-medium relative">
+                      <div className="absolute -top-2 -left-2 text-4xl text-primary/30 font-serif">"</div>
+                      {testimonial.quote}
+                      <div className="absolute -bottom-6 -right-2 text-4xl text-primary/30 font-serif">"</div>
                     </blockquote>
 
-                    {/* Author */}
+                    {/* Enhanced Author Section */}
                     <div className="flex items-center space-x-4">
                       <div className="relative">
+                        <div className="absolute inset-0 rounded-full bg-gradient-neon opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-60" />
                         <img
                           src={testimonial.avatar}
                           alt={testimonial.name}
-                          className="w-14 h-14 rounded-full object-cover border-2 border-primary/30 hover-glow-purple transition-all duration-300 group-hover:scale-105"
+                          className="relative w-16 h-16 rounded-full object-cover border-2 border-primary/50 transition-all duration-300 hover:border-accent"
                         />
-                        <div className="absolute inset-0 rounded-full gradient-lavender opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       <div>
-                        <div className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+                        <div className="font-semibold text-foreground text-lg transition-colors duration-300 hover:text-primary">
                           {testimonial.name}
                         </div>
-                        <div className="text-sm text-muted-foreground">
+                        <div className="text-sm text-muted-foreground mb-1">
                           {testimonial.role}
                         </div>
-                        <div className="text-sm text-primary font-medium group-hover:glow-purple transition-all duration-300">
+                        <div className="text-sm text-accent font-medium">
                           {testimonial.company}
                         </div>
                       </div>
                     </div>
                   </CardContent>
-                </GlassCard>
+                </InteractiveCard>
               </div>
             ))}
           </div>

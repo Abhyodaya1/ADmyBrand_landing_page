@@ -53,38 +53,47 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="relative mt-20">
-      {/* Newsletter Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <GlassCard variant="featured" size="lg" className="text-center fade-in-up">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-3xl font-bold font-space mb-4 gradient-text">
+      {/* Enhanced Newsletter Section */}
+      <section className="py-20 px-4 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 -translate-y-1/2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 right-1/4 w-48 h-48 -translate-y-1/2 bg-gradient-to-l from-secondary/10 to-primary/10 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto relative z-10">
+          <div className="glass-card text-center fade-in-up relative overflow-hidden neon-pulse">
+            {/* Animated Background */}
+            <div className="absolute inset-0 gradient-flow opacity-30" />
+            
+            <div className="relative z-10 max-w-3xl mx-auto p-12">
+              <h3 className="text-4xl md:text-5xl font-bold font-space mb-6 gradient-text">
                 Stay Ahead of the Curve
               </h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                Get the latest AI marketing insights, tips, and exclusive updates 
-                delivered straight to your inbox. Join 25,000+ marketing professionals.
+              <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
+                Get the latest omnichannel advertising insights, AI marketing strategies, 
+                and exclusive platform updates delivered straight to your inbox. 
+                Join 25,000+ marketing professionals.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <div className="flex-1">
+              <div className="flex flex-col sm:flex-row gap-6 max-w-lg mx-auto mb-6">
+                <div className="flex-1 relative">
                   <input
                     type="email"
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 bg-input/50 border border-glass-border/30 rounded-full text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    placeholder="Enter your email address"
+                    className="w-full px-6 py-4 bg-glass/50 backdrop-blur-md border border-glass-border/50 rounded-full text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 transition-all duration-300"
                   />
+                  <div className="absolute inset-0 rounded-full bg-gradient-border opacity-0 focus-within:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </div>
-                <button className="btn-hero flex items-center justify-center sm:px-6 ripple-effect hover-glow-purple">
-                  Subscribe
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                <button className="btn-hero flex items-center justify-center px-8 py-4 ripple-click group">
+                  Subscribe Now
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </button>
               </div>
               
-              <p className="text-xs text-muted-foreground mt-4">
-                No spam, unsubscribe at any time. We respect your privacy.
+              <p className="text-sm text-muted-foreground">
+                No spam, unsubscribe at any time. We respect your privacy and data security.
               </p>
             </div>
-          </GlassCard>
+          </div>
         </div>
       </section>
 
@@ -121,23 +130,27 @@ export function Footer() {
                 </div>
               </div>
 
-              {/* Social Links */}
-              <div className="flex space-x-3 mt-8">
+              {/* Enhanced Social Links */}
+              <div className="flex space-x-4 mt-8">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
                     aria-label={social.label}
-                    className="relative w-12 h-12 glass rounded-full flex items-center justify-center text-muted-foreground hover:text-white hover-glow-purple ripple-effect group transition-all duration-500 hover:scale-110 overflow-hidden"
+                    className="icon-social-glow relative w-14 h-14 glass rounded-full flex items-center justify-center text-muted-foreground hover:text-white ripple-click group transition-all duration-500 overflow-hidden"
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    {/* Background gradient overlay */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-0 group-hover:scale-100" />
+                    {/* Neon Glow Background */}
+                    <div className="absolute inset-0 rounded-full bg-gradient-neon opacity-0 group-hover:opacity-100 transition-all duration-500 blur-sm" />
+                    
+                    {/* Solid Background */}
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/80 to-secondary/80 opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100" />
                     
                     {/* Icon */}
-                    <social.icon className="relative z-10 h-5 w-5 group-hover:scale-110 transition-all duration-300" />
+                    <social.icon className="relative z-10 h-6 w-6 group-hover:scale-125 transition-all duration-300 drop-shadow-lg" />
                     
-                    {/* Ripple effect overlay */}
-                    <div className="absolute inset-0 rounded-full gradient-lavender opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                    {/* Pulse Ring */}
+                    <div className="absolute inset-0 rounded-full border-2 border-primary/50 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
                   </a>
                 ))}
               </div>
@@ -219,17 +232,27 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-glass-border/30 py-6 px-4">
-        <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+      {/* Enhanced Bottom Bar */}
+      <div className="border-t border-glass-border/30 py-8 px-4 relative overflow-hidden">
+        {/* Subtle Background Glow */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5" />
+        
+        <div className="container mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <div className="text-sm text-muted-foreground">
-              © 2025 ADmyBRAND AI Suite. All rights reserved.
+              © 2025 <span className="gradient-text font-semibold">ADmyBRAND AI Suite</span>. All rights reserved.
             </div>
-            <div className="flex items-center space-x-6 text-sm text-muted-foreground">
-              <span>Made with ❤️ for marketers</span>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
+            <div className="flex items-center space-x-8 text-sm text-muted-foreground">
+              <span className="flex items-center space-x-2">
+                <span>Made with</span>
+                <span className="text-red-500 animate-pulse">❤️</span>
+                <span>for marketers worldwide</span>
+              </span>
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  <div className="w-3 h-3 bg-success rounded-full animate-pulse" />
+                  <div className="absolute inset-0 w-3 h-3 bg-success rounded-full animate-ping opacity-75" />
+                </div>
                 <span>All systems operational</span>
               </div>
             </div>

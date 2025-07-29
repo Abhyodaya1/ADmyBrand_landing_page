@@ -6,7 +6,6 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
           content="Boost conversions by 300% with our AI-powered marketing intelligence platform. Advanced analytics, automated campaigns, and smart targeting for modern businesses."

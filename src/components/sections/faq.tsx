@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GlassCard, CardContent } from "@/components/ui/glass-card";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const faqs = [
   {
@@ -35,102 +36,70 @@ const faqs = [
   },
 ];
 
-export function FAQSection() {
-  const [openItems, setOpenItems] = useState<number[]>([1]); // First item open by default
+export function FAQScreen() {
+  const [openItems, setOpenItems] = useState<number[]>([]);
 
   const toggleItem = (id: number) => {
-    setOpenItems(prev => 
-      prev.includes(id) 
-        ? prev.filter(item => item !== id)
-        : [...prev, id]
+    setOpenItems(prev =>
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
     );
   };
 
   return (
-    <section id="faq" className="py-20 px-4 relative">
+    <section id="faq" className="py-20 px-4 min-h-screen">
       <div className="container mx-auto">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 fade-in-up">
-          <h2 className="text-4xl md:text-5xl font-bold font-space mb-6">
-            <span className="gradient-text">Frequently Asked</span>
-            <br />
-            Questions
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="gradient-text">Frequently Asked</span><br />Questions
           </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            Everything you need to know about ADmyBRAND AI Suite. 
-            Can't find what you're looking for? Contact our support team.
-          </p>
+          <p className="text-xl text-muted-foreground">Can't find what you're looking for? Contact support.</p>
         </div>
 
-        {/* FAQ Items */}
         <div className="max-w-4xl mx-auto space-y-4">
           {faqs.map((faq, index) => {
             const isOpen = openItems.includes(faq.id);
-            
+
             return (
               <GlassCard
                 key={faq.id}
                 variant="interactive"
-                className={`fade-in-up transition-all duration-300 ${
-                  isOpen ? "ring-1 ring-primary/30" : ""
-                }`}
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`transition-all duration-300 ${isOpen ? "ring-1 ring-primary/30" : ""}`}
                 onClick={() => toggleItem(faq.id)}
               >
                 <CardContent className="p-0">
-                  {/* Question */}
-                  <div className="flex items-center justify-between p-6 cursor-pointer">
-                    <h3 className="text-lg font-semibold text-foreground pr-4">
-                      {faq.question}
-                    </h3>
+                  {/* Question Header */}
+                  <div className="flex items-center justify-between p-3 cursor-pointer">
+                    <h3 className="text-lg font-semibold text-foreground pr-4">{faq.question}</h3>
                     <div className="flex-shrink-0">
                       {isOpen ? (
-                        <ChevronUp className="h-5 w-5 text-primary transition-transform duration-300" />
+                        <ChevronUp className="h-5 w-5 text-primary" />
                       ) : (
-                        <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform duration-300" />
+                        <ChevronDown className="h-5 w-5 text-muted-foreground" />
                       )}
                     </div>
                   </div>
 
-                  {/* Answer */}
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    <div className="px-6 pb-6 pt-0">
-                      <div className="h-px bg-glass-border/30 mb-4" />
-                      <p className="text-muted-foreground leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
+                  {/* Animated Answer */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-6">
+                          <div className="h-px bg-glass-border/30 mb-4" />
+                          <p className="text-muted-foreground">{faq.answer}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </CardContent>
               </GlassCard>
             );
           })}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-16 fade-in-up">
-          <GlassCard variant="featured" className="inline-block">
-            <CardContent className="text-center p-8">
-              <h3 className="text-2xl font-bold mb-4 gradient-text">
-                Still Have Questions?
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                Our expert team is here to help you succeed with AI marketing
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="btn-hero">
-                  Contact Support
-                </button>
-                <button className="btn-glass">
-                  Schedule Demo
-                </button>
-              </div>
-            </CardContent>
-          </GlassCard>
         </div>
       </div>
     </section>

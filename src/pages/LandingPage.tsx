@@ -2,12 +2,14 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { Navbar } from "@/components/navigation/navbar";
 import { HeroSection } from "@/components/sections/hero";
 import { FeaturesSection } from "@/components/sections/features";
-import { PricingSection } from "@/components/sections/pricing";
 import { TestimonialsSection } from "@/components/sections/testimonials";
 import { FAQSection } from "@/components/sections/faq";
 import { Footer } from "@/components/sections/footer";
 import { ContactForm } from "@/components/forms/contact-form";
 import { GlassCard } from "@/components/ui/glass-card";
+import { PricingSection } from "../components/sections/pricing";
+import { PricingSectionWithSelector } from "../components/sections/PricingSectionWithSelector";
+import { FAQScreen } from "../components/sections/faq";
 
 export default function LandingPage() {
   useScrollAnimation();
@@ -19,9 +21,9 @@ export default function LandingPage() {
       <main>
         <HeroSection />
         <FeaturesSection />
-        <PricingSection />
+       <PricingSection /> 
         <TestimonialsSection />
-        <FAQSection />
+        <FAQScreen/>
         
         {/* Contact Section */}
         <section id="contact" className="py-20 px-4">

@@ -65,7 +65,7 @@ export function HeroSection() {
         <div className="relative fade-in-right">
           <div className="relative">
             <img
-              src={heroImage}
+              src={heroImage.src}
               alt="ADmyBRAND AI Dashboard"
               className="w-full h-auto rounded-3xl shadow-glow-primary"
             />
